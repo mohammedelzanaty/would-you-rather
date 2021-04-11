@@ -10,8 +10,11 @@ import {
   Typography,
   withStyles,
 } from '@material-ui/core'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { Copyright } from '../components'
 import LOGO from '../assets/logo.png'
+import { setAuthedUser } from '../actions/authed-user.action'
 
 const styles = (theme) => ({
   paper: {
@@ -40,13 +43,17 @@ const styles = (theme) => ({
 
 class Login extends Component {
   state = {
-    authedUser: null,
+    authedUser: '',
   }
 
-  handleChange = (event) => {}
+  handleChange = (event) => {
+    this.setState({ authedUser: event.target.value })
+    this.props.dispatch(setAuthedUser(event.target.value))
+  }
 
   render() {
-    const { classes } = this.props
+    const { classes, users } = this.props
+    const { authedUser } = this.state
     return (
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
@@ -59,18 +66,31 @@ class Login extends Component {
           <Typography component="h1" variant="h5">
             Sign in to Would You Rather Game By Selecting One of Those Users
           </Typography>
-
           <form className={classes.form}>
             <FormControl className={classes.formControl}>
-              <InputLabel>Select User</InputLabel>
+              <InputLabel color="secondary">Select User</InputLabel>
               <Select
-                id="demo-simple-select"
-                value={this.state.user}
+                value={authedUser}
                 onChange={this.handleChange}
+                color="secondary"
               >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                {users &&
+                  Object.keys(users)
+                    .map((userId) => ({
+                      avatarURL: users[userId].avatarURL,
+                      id: users[userId].id,
+                      name: users[userId].name,
+                    }))
+                    .map((user) => (
+                      <MenuItem key={user.id} value={user.id}>
+                        <img
+                          src={user.avatarURL}
+                          alt={`${user.name} avatar`}
+                          width="40"
+                        />{' '}
+                        {user.name}
+                      </MenuItem>
+                    ))}
               </Select>
             </FormControl>
             <Button
@@ -79,6 +99,14 @@ class Login extends Component {
               variant="contained"
               color="secondary"
               className={classes.submit}
+              onClick={(event) => {
+                event.preventDefault()
+                if (this.state.authedUser) {
+                  this.props.history.push('/')
+                } else {
+                  alert('Please Select user first')
+                }
+              }}
             >
               Sign In
             </Button>
@@ -92,4 +120,10 @@ class Login extends Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(Login)
+const mapStateToProps = ({ users }) => ({
+  users,
+})
+
+export default connect(mapStateToProps)(
+  withStyles(styles, { withTheme: true })(withRouter(Login))
+)

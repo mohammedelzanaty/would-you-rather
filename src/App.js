@@ -4,7 +4,7 @@ import LoadingBar from 'react-redux-loading'
 import { Switch, Route } from 'react-router-dom'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { handleInitialData } from './actions/shared.action'
-import { ProtectedRoute } from './ProtectedRoute'
+import ProtectedRoute from './ProtectedRoute'
 import { Login } from './views'
 import { Layout } from './layouts'
 
@@ -18,17 +18,15 @@ class App extends Component {
       <Fragment>
         <CssBaseline />
         <LoadingBar />
-        {this.props.loading === true ? null : (
-          <Switch>
-            <Route
-              exact
-              path="/login"
-              name="Login Page"
-              render={(props) => <Login {...props} />}
-            />
-            <ProtectedRoute path="/" name="Main" component={Layout} />
-          </Switch>
-        )}
+        <Switch>
+          <Route
+            exact
+            path="/login"
+            name="Login Page"
+            render={(props) => <Login {...props} />}
+          />
+          <ProtectedRoute path="/" name="Main" component={Layout} />
+        </Switch>
       </Fragment>
     )
   }
@@ -36,7 +34,7 @@ class App extends Component {
 
 function mapStateToProps({ authedUser }) {
   return {
-    loading: authedUser === null,
+    authedUser,
   }
 }
 

@@ -1,17 +1,13 @@
 import React from 'react'
-import { withRouter, Redirect, Route } from 'react-router-dom'
+import { Redirect, Route } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-export const ProtectedRoute = ({
-  component: Component,
-  exact,
-  path,
-  isAuthenticated = true,
-}) => (
+const ProtectedRoute = ({ component: Component, exact, path, authedUser }) => (
   <Route
     exact={exact}
     path={path}
     render={(props) =>
-      isAuthenticated ? (
+      authedUser ? (
         <Component {...props} />
       ) : (
         <Redirect
@@ -25,4 +21,8 @@ export const ProtectedRoute = ({
   />
 )
 
-export default withRouter(ProtectedRoute)
+const mapStateToProps = ({ authedUser }) => ({
+  authedUser,
+})
+
+export default connect(mapStateToProps)(ProtectedRoute)

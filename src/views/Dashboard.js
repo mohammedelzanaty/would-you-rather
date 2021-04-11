@@ -24,14 +24,14 @@ class Dashboard extends Component {
       <Container className="content">
         <h1 className="content__title">Dashboard</h1>
         <Tabs value={value} onChange={this.handleChange}>
-          <Tab label="Unanswered Questions" {...a11yProps(0)} />
-          <Tab label="Answered Questions" {...a11yProps(1)} />
+          <Tab label={`Unanswered Questions ${1}`} {...a11yProps(0)} />
+          <Tab label={`Answered Questions ${4}`} {...a11yProps(1)} />
         </Tabs>
         <TabPanel value={value} index={0}>
           <Question />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Item Two
+          <Question />
         </TabPanel>
       </Container>
     )

@@ -9,6 +9,8 @@ import {
   Icon,
 } from '@material-ui/core'
 import LOGO from '../assets/logo.png'
+import { connect } from 'react-redux'
+import { removeAuthedUser } from '../actions/authed-user.action'
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -77,7 +79,7 @@ function Header(props) {
         </nav>
         <Button
           onClick={() => {
-            // TODO dispatch logout event
+            props.dispatch(removeAuthedUser())
             props.history.push('/login')
           }}
           color="secondary"
@@ -91,4 +93,4 @@ function Header(props) {
   )
 }
 
-export default withRouter(Header)
+export default withRouter(connect()(Header))

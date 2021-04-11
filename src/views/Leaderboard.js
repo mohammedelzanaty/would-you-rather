@@ -79,14 +79,14 @@ class Leaderboard extends Component {
                 </Typography>
               </Grid>
               <Grid
-                container
+                item
                 md={4}
                 style={{
                   display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
-                direction={'column'}
-                alignItems="center"
-                justifyContent="center"
               >
                 <Typography
                   component="h6"
