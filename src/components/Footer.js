@@ -7,6 +7,7 @@ import {
   Grid,
   Box,
 } from '@material-ui/core'
+import Copyright from './Copyright'
 
 const footers = [
   {
@@ -50,22 +51,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }))
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link
-        color="inherit"
-        href="https://www.linkedin.com/in/mohammedelzanaty129/"
-      >
-        Mohammed Elzanaty
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  )
-}
 
 export default function Footer() {
   const classes = useStyles()
