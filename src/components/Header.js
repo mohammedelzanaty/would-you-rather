@@ -78,7 +78,7 @@ function Header(props) {
             // TODO dispatch logout event
             props.history.push('/login')
           }}
-          color="primary"
+          color="secondary"
           variant="outlined"
           className={classes.link}
         >

@@ -60,7 +60,7 @@ class Login extends Component {
             Sign in to Would You Rather Game By Selecting One of Those Users
           </Typography>
 
-          <form className={classes.form} noValidate>
+          <form className={classes.form}>
             <FormControl className={classes.formControl}>
               <InputLabel>Select User</InputLabel>
               <Select
@@ -77,7 +77,7 @@ class Login extends Component {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              color="secondary"
               className={classes.submit}
             >
               Sign In
