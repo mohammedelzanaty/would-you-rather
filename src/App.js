@@ -7,6 +7,7 @@ import { handleInitialData } from './actions/shared.action'
 import ProtectedRoute from './ProtectedRoute'
 import { Login } from './views'
 import { Layout } from './layouts'
+import { ToastContainer } from 'react-toastify'
 
 class App extends Component {
   componentDidMount() {
@@ -18,6 +19,7 @@ class App extends Component {
       <Fragment>
         <CssBaseline />
         <LoadingBar />
+        <ToastContainer />
         <Switch>
           <Route
             exact

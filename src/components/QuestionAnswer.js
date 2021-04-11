@@ -6,12 +6,10 @@ import {
   Grid,
   LinearProgress,
   Typography,
-  withStyles,
 } from '@material-ui/core'
 
 class QuestionAsk extends Component {
   render() {
-    const { classes } = this.props
     return (
       <Container className="content" component="main">
         <Grid container>

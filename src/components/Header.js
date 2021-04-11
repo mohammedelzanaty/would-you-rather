@@ -7,6 +7,10 @@ import {
   Box,
   Button,
   Icon,
+  ListItem,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
 } from '@material-ui/core'
 import LOGO from '../assets/logo.png'
 import { connect } from 'react-redux'
@@ -35,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     borderRadius: '10px',
   },
+  meta: {
+    display: 'flex',
+  },
 }))
 
 const NAV_ITEMS = [
@@ -43,8 +50,9 @@ const NAV_ITEMS = [
   { id: 3, label: 'Leader Board', path: '/leader-board' },
 ]
 
-function Header(props) {
+function Header({ users, authedUser, dispatch, history }) {
   const classes = useStyles()
+  const currentUser = users[authedUser]
   return (
     <AppBar
       position="static"
@@ -77,20 +85,28 @@ function Header(props) {
               </Link>
             ))}
         </nav>
-        <Button
-          onClick={() => {
-            props.dispatch(removeAuthedUser())
-            props.history.push('/login')
-          }}
-          color="secondary"
-          variant="outlined"
-          className={classes.link}
-        >
-          <Icon>logout</Icon> Logout
-        </Button>
+        <Box className={classes.meta}>
+          <ListItem button>
+            <ListItemAvatar>
+              <Avatar alt="Profile Picture" src={currentUser.avatarURL} />
+            </ListItemAvatar>
+            <ListItemText primary={currentUser.name} />
+          </ListItem>
+          <Button
+            onClick={() => {
+              dispatch(removeAuthedUser())
+              history.push('/login')
+            }}
+            color="secondary"
+            className={classes.link}
+          >
+            <Icon>logout</Icon>
+          </Button>
+        </Box>
       </Toolbar>
     </AppBar>
   )
 }
 
-export default withRouter(connect()(Header))
+const mapStateToProps = ({ authedUser, users }) => ({ authedUser, users })
+export default withRouter(connect(mapStateToProps)(Header))

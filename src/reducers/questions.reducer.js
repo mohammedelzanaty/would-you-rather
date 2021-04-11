@@ -5,16 +5,15 @@ export default function questionsReducer(questions = {}, action) {
     case RECEIVE_QUESTIONS:
       return {
         ...questions,
-        ...action.payload.questions
+        ...action.payload.questions,
       }
     case ADD_QUESTION:
       const { question } = action.payload
       return {
         ...questions,
-        [question.id]: question
+        [question.id]: question,
       }
     case ANSWER_QUESTION:
-      // TODO: write logic for save new question
       return questions
     default:
       return questions
