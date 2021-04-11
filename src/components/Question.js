@@ -59,7 +59,7 @@ const Question = () => {
         </Grid>
       </CardContent>
       <CardActions>
-        <Link to={`/questions/${1}`} style={{ width: '100%' }}>
+        <Link to={`/question/${1}`} style={{ width: '100%' }}>
           <Button type="submit" fullWidth variant="contained" color="secondary">
             View Question
           </Button>

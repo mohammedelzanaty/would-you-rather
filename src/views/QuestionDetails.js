@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { QuestionAnswer, QuestionAsk } from '../components'
 
 class QuestionDetails extends Component {
   render() {
-    return <h1>QuestionDetails</h1>
+    const answer = true
+    return answer ? <QuestionAnswer /> : <QuestionAsk />
   }
 }
 

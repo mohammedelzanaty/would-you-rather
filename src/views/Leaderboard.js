@@ -79,7 +79,7 @@ class Leaderboard extends Component {
                 </Typography>
               </Grid>
               <Grid
-                item
+                container
                 md={4}
                 style={{
                   display: 'flex',

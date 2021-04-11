@@ -52,12 +52,14 @@ function Header(props) {
     >
       <Toolbar className={classes.toolbar}>
         <Box className={`${classes.toolbarTitle}`}>
-          <img
-            src={LOGO}
-            alt="would you rather logo"
-            width="40"
-            className={`${classes.logo}`}
-          />
+          <Link to={'/'}>
+            <img
+              src={LOGO}
+              alt="would you rather logo"
+              width="40"
+              className={`${classes.logo}`}
+            />
+          </Link>
         </Box>
         <nav>
           {NAV_ITEMS &&
