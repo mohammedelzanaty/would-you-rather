@@ -14,7 +14,18 @@ export default function questionsReducer(questions = {}, action) {
         [question.id]: question,
       }
     case ANSWER_QUESTION:
-      return questions
+      const { authedUser, qid, answer } = action.payload
+      const targetOption = questions[qid][answer]
+      return {
+        ...questions,
+        [qid]: {
+          ...questions[qid],
+          [answer]: {
+            ...targetOption,
+            votes: [...targetOption.votes, authedUser],
+          },
+        },
+      }
     default:
       return questions
   }

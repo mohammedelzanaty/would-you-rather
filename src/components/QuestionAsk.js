@@ -9,6 +9,9 @@ import {
   RadioGroup,
   withStyles,
 } from '@material-ui/core'
+import { toast } from 'react-toastify'
+import { connect } from 'react-redux'
+import { handleAnswerQuestion } from '../actions/questions.action'
 
 const styles = () => ({
   input: {
@@ -26,20 +29,35 @@ class QuestionAsk extends Component {
     this.setState({ value: event.target.value })
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault()
+    const { value: answer } = this.state
+    const {
+      question: { id: qid },
+      authedUser,
+      dispatch,
+    } = this.props
+    if (!this.state.value) {
+      toast.info('Please Select a Value First')
+    }
+    dispatch(handleAnswerQuestion({ authedUser, qid, answer }))
+  }
+
   render() {
-    const { classes } = this.props
+    const { classes, question } = this.props
     const { value } = this.state
     return (
       <Container className="content" component="main">
         <Grid container>
           <Grid item md={10}>
-            <h1 className="content__title">Tyler McGinnis asks</h1>
+            <h1 className="content__title">{question.author} asks</h1>
             <h2>Would you rather...</h2>
           </Grid>
           <Grid item md={2}>
             <img
-              src={`https://randomuser.me/api/portraits/men/32.jpg`}
-              alt={`question avatar`}
+              src={question.avatarURL}
+              alt={`${question.author} avatar`}
+              width={'120px'}
             />
           </Grid>
         </Grid>
@@ -51,17 +69,23 @@ class QuestionAsk extends Component {
             onChange={this.handleRadioChange}
           >
             <FormControlLabel
-              value="best"
+              value="optionOne"
               control={<Radio />}
-              label="The best!"
+              label={question.optionOne.text}
             />
             <FormControlLabel
-              value="worst"
+              value="optionTwo"
               control={<Radio />}
-              label="The worst."
+              label={question.optionTwo.text}
             />
           </RadioGroup>
-          <Button type="submit" color="secondary" fullWidth variant="contained">
+          <Button
+            type="submit"
+            color="secondary"
+            fullWidth
+            variant="contained"
+            onClick={this.handleSubmit}
+          >
             Submit Question Answer
           </Button>
         </FormControl>
@@ -70,4 +94,6 @@ class QuestionAsk extends Component {
   }
 }
 
-export default withStyles(styles)(QuestionAsk)
+const mapStateToProps = ({ authedUser }) => ({ authedUser })
+
+export default withStyles(styles)(connect(mapStateToProps)(QuestionAsk))

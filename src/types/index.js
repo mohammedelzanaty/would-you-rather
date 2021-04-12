@@ -1,6 +1,8 @@
 // authed user
 export const SET_AUTHED_USER = 'SET_AUTHED_USER'
 export const REMOVE_AUTHED_USER = 'REMOVE_AUTHED_USER'
+export const USER_ANSWER_QUESTION = 'USER_ANSWER_QUESTION'
+export const USER_ADD_QUESTION = 'USER_ADD_QUESTION'
 // users
 export const RECEIVE_USERS = 'RECEIVE_USERS'
 // questions

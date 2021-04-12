@@ -12,4 +12,3 @@ export function removeAuthedUser(userId) {
     type: REMOVE_AUTHED_USER,
   }
 }
-

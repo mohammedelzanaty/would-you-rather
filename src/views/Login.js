@@ -15,6 +15,7 @@ import { withRouter } from 'react-router-dom'
 import { Copyright } from '../components'
 import LOGO from '../assets/logo.png'
 import { setAuthedUser } from '../actions/authed-user.action'
+import { toast } from 'react-toastify'
 
 const styles = (theme) => ({
   paper: {
@@ -104,7 +105,7 @@ class Login extends Component {
                 if (this.state.authedUser) {
                   this.props.history.push('/')
                 } else {
-                  alert('Please Select user first')
+                  toast.info('Please Select user first')
                 }
               }}
             >

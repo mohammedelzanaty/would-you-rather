@@ -5,7 +5,6 @@ import { formatQuestion } from './helpers'
 let users = usersData
 let questions = questionsData
 
-
 export function _getUsers() {
   return new Promise((res, rej) => {
     setTimeout(() => res({ ...users }), 1000)
@@ -18,7 +17,6 @@ export function _getQuestions() {
   })
 }
 
-
 export function _saveQuestion(question) {
   return new Promise((res, rej) => {
     const authedUser = question.author
@@ -27,15 +25,15 @@ export function _saveQuestion(question) {
     setTimeout(() => {
       questions = {
         ...questions,
-        [formattedQuestion.id]: formattedQuestion
+        [formattedQuestion.id]: formattedQuestion,
       }
 
       users = {
         ...users,
         [authedUser]: {
           ...users[authedUser],
-          questions: users[authedUser].questions.concat([formattedQuestion.id])
-        }
+          questions: users[authedUser].questions.concat([formattedQuestion.id]),
+        },
       }
 
       res(formattedQuestion)
@@ -52,9 +50,9 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
           ...users[authedUser],
           answers: {
             ...users[authedUser].answers,
-            [qid]: answer
-          }
-        }
+            [qid]: answer,
+          },
+        },
       }
 
       questions = {
@@ -63,9 +61,9 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
           ...questions[qid],
           [answer]: {
             ...questions[qid][answer],
-            votes: questions[qid][answer].votes.concat([authedUser])
-          }
-        }
+            votes: questions[qid][answer].votes.concat([authedUser]),
+          },
+        },
       }
 
       res()
