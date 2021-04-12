@@ -28,7 +28,8 @@ class Dashboard extends Component {
         optionOne: this.props.questions[questionId].optionOne,
         optionTwo: this.props.questions[questionId].optionTwo,
         timestamp: this.props.questions[questionId].timestamp,
-        avatarURL: this.props.users[this.props.authedUser].avatarURL,
+        avatarURL: this.props.users[this.props.questions[questionId].author]
+          .avatarURL,
       }))
       .sort(sortBy('-timestamp'))
 
@@ -43,11 +44,10 @@ class Dashboard extends Component {
 
     const unAnsweredQuestions = Object.keys(questions).filter(
       (questionId) =>
-        !questions[questionId].optionOne.votes.includes(authedUser) ||
+        !questions[questionId].optionOne.votes.includes(authedUser) &&
         !questions[questionId].optionTwo.votes.includes(authedUser)
     )
 
-    console.log({ unAnsweredQuestions, answeredQuestions })
     return (
       <Container className="content">
         <h1 className="content__title">Dashboard</h1>

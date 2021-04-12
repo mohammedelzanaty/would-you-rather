@@ -25,7 +25,7 @@ const Question = ({ id, avatarURL, author, optionOne, optionTwo }) => {
       <CardContent>
         <Grid container>
           <Grid item md={2}>
-            <img src={avatarURL} alt={`${author} avatar`} />
+            <img src={avatarURL} alt={`${author} avatar`} width="120px" />
           </Grid>
           <Grid item md={10}>
             <Typography gutterBottom>
